@@ -48,11 +48,6 @@ vector<int> merge_sort(vector<int> A) {
     vector<int> result = merge(sorted_left, sorted_right);
 
     return result;
-
-    // call merge_sort on first half
-    // call merge_sort on second half
-    // merge two sorted halfs
-    // return sorted vector
 }
 
 int main() {
