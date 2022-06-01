@@ -67,6 +67,7 @@ void linkedlist_pop_front(struct LinkedList* linkedlist) {
         linkedlist->head = linkedlist->head->next;
     }
     free(node);
+    linkedlist->size -= 1;
 }
 
 void printLinkedList(struct LinkedList* linkedlist) {
