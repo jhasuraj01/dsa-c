@@ -216,22 +216,38 @@ void bfs(int src, int N, int visited[N], int G[N][N]) {
 
 int main() {
     
-    int N = 8;
-    int G[8][8] = {
-        {0, 0, 1, 0, 1, 0, 0, 0},
-        {0, 0, 1, 1, 0, 1, 1, 0},
-        {1, 1, 0, 0, 0, 0, 0, 0},
-        {0, 1, 0, 0, 0, 1, 0, 0},
-        {1, 0, 0, 0, 0, 0, 1, 0},
-        {0, 1, 0, 1, 0, 0, 1, 1},
-        {0, 1, 0, 0, 1, 1, 0, 1},
-        {0, 0, 0, 0, 0, 1, 1, 0}
-    };
+    int N, S, E;
+    printf("Enter No. of Nodes: ");
+    scanf("%d", &N);
 
-    int visited1[8] = {0}, visited2[8] = {0};
+    printf("Enter Source: ");
+    scanf("%d", &S);
 
-    dfs(0, N, visited1, G);
-    bfs(0, N, visited2, G);
+    int G[N][N], visited1[N], visited2[N];
+    for(int i = 0; i < N; ++i) {
+        for(int j = 0; j < N; ++j) {
+            G[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < N; ++i)
+    {
+        visited1[i] = 0;
+        visited2[i] = 0;
+    }
+    
+
+    printf("Enter No. of Edges: ");
+    scanf("%d", &E);
+
+    for(int i = 0; i < E; ++i) {
+        int a, b;
+        scanf("%d %d", &a, &b);
+        G[a][b] = 1;
+        G[b][a] = 1;
+    }
+
+    dfs(S, N, visited1, G);
+    bfs(S, N, visited2, G);
 
     return 0;
 }
