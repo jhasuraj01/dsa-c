@@ -1,16 +1,17 @@
 #include<stdio.h>
 #include<limits.h>
 
-int min_index(int N, int array[N]) {
+// returns index of minimum non negative value otherwise -1;
+int min_priority(int N, int array[N]) {
     int index = 0;
     for (int i = 0; i < N; ++i)
     {
         if(array[i] >= 0 && array[i] < array[index]) {
             index = i;
         }
-    }
+    }/
 
-    if (array[index] == -1)
+    if (array[index] < 0)
     {
         return -1;
     }
@@ -18,30 +19,28 @@ int min_index(int N, int array[N]) {
     return index;
 }
 
-void prims(int src, int N, int parent[N], int G[N][N]) {
-    int cost[N];
+void prims(int start, int N, int parent[N], int G[N][N]) {
+    int priority[N];
     for (int i = 0; i < N; ++i)
-    {
-        cost[i] = INT_MAX;
-        parent[i] = -1;
-    }
+        priority[i] = INT_MAX;
 
-    // pick src as initial node
-    cost[src] = 0;
-    parent[src] = src;
+    // pick start as initial node
+    priority[start] = 0;
+    parent[start] = start;
 
-    int node = min_index(N, cost);
+    int node = start;
 
+    // while unfixed node exists;
     while(node >= 0) {
-        cost[node] = -1;
+        priority[node] = -1; // fix current node;
         for (int i = 0; i < N; ++i)
         {
-            if(G[node][i] > 0 && cost[i] > G[node][i]) {
-                cost[i] = G[node][i];
+            if(G[node][i] > 0 && priority[i] > G[node][i]) {
+                priority[i] = G[node][i];
                 parent[i] = node;
             }
         }
-        node = min_index(N, cost);
+        node = min_priority(N, priority);
     }
 }
 
@@ -65,10 +64,10 @@ int main() {
     scanf("%d", &E);
 
     for(int i = 0; i < E; ++i) {
-        int a, b, cost;
-        scanf("%d %d %d", &a, &b, &cost);
-        G[a][b] = cost;
-        G[b][a] = cost;
+        int a, b, priority;
+        scanf("%d %d %d", &a, &b, &priority);
+        G[a][b] = priority;
+        G[b][a] = priority;
     }
 
     int parent[N];
@@ -81,7 +80,7 @@ int main() {
         int p = parent[i];
         if(i != p) {
             total_cost += G[i][p];
-            printf("%d <--> %d, Cost: %d\n", i, p, total_cost);
+            printf("%d <--> %d, Cost: %d\n", i, p, G[i][p]);
         }
     }
 
