@@ -9,7 +9,7 @@ int min_priority(int N, int array[N]) {
         if(array[i] >= 0 && array[i] < array[index]) {
             index = i;
         }
-    }/
+    }
 
     if (array[index] < 0)
     {
