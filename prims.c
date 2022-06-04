@@ -64,10 +64,10 @@ int main() {
     scanf("%d", &E);
 
     for(int i = 0; i < E; ++i) {
-        int a, b, priority;
-        scanf("%d %d %d", &a, &b, &priority);
-        G[a][b] = priority;
-        G[b][a] = priority;
+        int a, b, cost;
+        scanf("%d %d %d", &a, &b, &cost);
+        G[a][b] = cost;
+        G[b][a] = cost;
     }
 
     int parent[N];
