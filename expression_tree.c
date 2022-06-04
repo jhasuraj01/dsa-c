@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define MAX_STACK_SIZE 10
+#include<assert.h>
+
+#define MAX_STACK_SIZE 10000
 
 struct Node
 {
@@ -30,13 +32,13 @@ struct Node* expression_tree(int length, char expression[length]) {
             stack[stack_size++] = new_node(symbol);
         }
         else {
-            struct Node* root = new_node(symbol);
-            root->right = stack[--stack_size];
-            root->left = stack[--stack_size];
-            stack[stack_size++] = root;
+            struct Node* parent = new_node(symbol);
+            parent->right = stack[--stack_size];
+            parent->left = stack[--stack_size];
+            stack[stack_size++] = parent;
         }
     }
-    
+    assert(stack_size == 1);
     return stack[0];
 }
 
@@ -85,7 +87,21 @@ void preorderNonRecursive(struct Node* root) {
 }
 
 // non recursive inorder
+void inorderNonRecursive(struct Node* root) {
+    // struct Node* stack[MAX_STACK_SIZE];
+    // int stack_size = 0;
 
+    // stack[stack_size++] = root;
+
+    // while(stack_size > 0) {
+    //     struct Node* root = stack[--stack_size];
+    //     if(root == NULL) continue;
+    //     print(root);
+    //     stack[stack_size++] = root->right;
+    //     stack[stack_size++] = root;
+    //     stack[stack_size++] = root->left;
+    // }
+}
 
 // non recursive postorder
 
@@ -114,9 +130,9 @@ int main() {
     printf("\nPostOrder: ");
     postorder(root);
 
-    // PreOrder Non Recursive Traversal
-    printf("\nPreOrder Non Recursive Traversal: ");
-    preorderNonRecursive(root);
+    // // PreOrder Non Recursive Traversal
+    // printf("\nPreOrder Non Recursive Traversal: ");
+    // preorderNonRecursive(root);
 
     printf("\n\n");
 
